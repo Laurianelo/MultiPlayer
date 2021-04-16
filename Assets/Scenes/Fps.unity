@@ -184,7 +184,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 3
-  mouseSensitivity: 3
+  mouseSensitivityX: 3
+  mouseSensitivityY: 2
   motor: {fileID: 0}
 --- !u!114 &639998419
 MonoBehaviour:
@@ -199,8 +200,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocity: {x: 0, y: 0, z: 0}
-  rb: {fileID: 0}
+  rb: {fileID: 639998420}
   rotation: {x: 0, y: 0, z: 0}
+  cam: {fileID: 1212199315}
+  rotationCamera: {x: 0, y: 0, z: 0}
 --- !u!54 &639998420
 Rigidbody:
   m_ObjectHideFlags: 0

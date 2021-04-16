@@ -9,7 +9,10 @@ public class PlayerController : MonoBehaviour
     private float speed = 3f;
 
     [SerializeField]
-    private float mouseSensitivity = 3f;
+    private float mouseSensitivityX = 3f;
+
+    [SerializeField]
+    private float mouseSensitivityY = 3f;
 
     [SerializeField]
     private PlayerMotor motor;
@@ -29,39 +32,38 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         MovePlayer();
-
     }
 
     private void MovePlayer()
     {
         GetInput();
+
         //calculate velocity
         Vector3 moveHorizontal = transform.right * xMov;
         Vector3 moveVertical = transform.forward * zMov;
         Vector3 velocity = (moveHorizontal + moveVertical).normalized * speed;
-
         motor.Move(velocity);
 
-
-        //player rotation left and right
-        yRot = Input.GetAxisRaw("Mouse X");
-        Vector3 rotationLF = new Vector3(0, yRot, 0) * mouseSensitivity;
-        motor.Rotate(rotationLF);
-        /*
-        //player rotation up and down
-        xRot = Input.GetAxisRaw("Mouse X");
-        Vector3 rotationUD = new Vector3(0, xRot, 0) * mouseSensitivity;
-        motor.Rotate(rotationUD);*/
+        RotatePlayer();
     }
 
     private void RotatePlayer()
     {
-     
+        //player rotation left and right 
+        Vector3 rotationLR = new Vector3(0, yRot, 0) * mouseSensitivityX;
+        motor.RotateLeftAndRight(rotationLR);
+
+        //player rotation up and down (camera
+        Vector3 rotationUD = new Vector3(xRot, 0, 0) * mouseSensitivityY;
+        motor.RotateUpAndDown(rotationUD);
     }
 
     private void GetInput()
     {
         xMov = Input.GetAxisRaw("Horizontal");
         zMov = Input.GetAxisRaw("Vertical");
+
+        yRot = Input.GetAxisRaw("Mouse X");
+        xRot = Input.GetAxisRaw("Mouse Y");
     }
 }
